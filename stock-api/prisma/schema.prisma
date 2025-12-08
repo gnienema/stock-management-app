@@ -1,0 +1,78 @@
+// stock-api/prisma/schema.prisma
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// --- NOS TABLES ---
+
+model Client {
+  id           Int      @id @default(autoincrement())
+  nom          String
+  prenoms      String
+  email        String   @unique
+  telephone    String?
+  adresse      String?
+  dateCreation DateTime @default(now()) @map("date_creation")
+
+  @@map("client")
+}
+
+model Fournisseur {
+  id           Int      @id @default(autoincrement())
+  nom          String
+  contactEmail String   @unique @map("contact_email")
+  telephone    String?
+  adresse      String?
+  dateCreation DateTime @default(now()) @map("date_creation")
+
+  @@map("fournisseur")
+}
+
+model Produit {
+  id            Int      @id @default(autoincrement())
+  reference     String   @unique
+  libelle       String
+  description   String?
+  prixUnitaire  Float    @map("prix_unitaire")
+  seuilMinStock Int      @map("seuil_min_stock")
+  dateCreation  DateTime @default(now()) @map("date_creation")
+
+  @@map("produit")
+}
+
+model Stock {
+  id            Int @id @default(autoincrement())
+  idProduit     Int @unique @map("id_produit")
+  qte           Int
+  idFournisseur Int? @map("id_fournisseur")
+
+  @@map("stock")
+}
+
+model Commande {
+  id           Int      @id @default(autoincrement())
+  idClient     Int      @map("id_client")
+  prixTotal    Float    @map("prix_total")
+  statut       String   @default("VALIDEE")
+  dateCommande DateTime @default(now()) @map("date_commande")
+
+  @@map("commande")
+}
+
+model LigneCommande {
+  id                Int    @id @default(autoincrement())
+  idCommande        Int    @map("id_commande")
+  idProduit         Int    @map("id_produit")
+  libelleProduit    String @map("libelle_produit")
+  prixUnitaireAchat Float  @map("prix_unitaire_achat")
+  qte               Int
+  totalLigne        Float  @map("total_ligne")
+
+  @@map("ligne_commande")
+}
