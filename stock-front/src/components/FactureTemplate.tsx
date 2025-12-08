@@ -1,4 +1,4 @@
-import { Box, Typography, Table, TableBody, TableCell, TableHead, TableRow, Divider, Button } from '@mui/material';
+import { Box, Typography, Divider, Button } from '@mui/material';
 import PrintIcon from '@mui/icons-material/Print';
 import { formatPrice, formatDate } from '../utils/format';
 

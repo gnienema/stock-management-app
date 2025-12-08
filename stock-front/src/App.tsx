@@ -1,10 +1,8 @@
 // stock-front/src/App.tsx
 
-import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ThemeProvider, Box, Typography } from '@mui/material'; 
-// Ligne 19 : VÉRIFIEZ L'EXISTENCE DU FICHIER theme.ts dans src/
 //import theme from "./theme"; 
+import { Box, Typography } from '@mui/material';
 
 // Layout
 import MainLayout from './components/MainLayout'; 

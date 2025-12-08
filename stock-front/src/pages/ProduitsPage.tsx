@@ -153,7 +153,7 @@ const handleRestock = () => {
     const finalDLC = (dlc && dlc.trim() !== '') ? dlc : undefined;
 
 
-    api.post(`/stock/${selectedProduitForStock.id}/ravitailler`, { 
+    api.post(`/stock/${selectedProduitForStock?.id}/ravitailler`, { 
         qte: qte, 
         idFournisseur: Number(selectedFournisseurId),
         referenceLot: referenceLot,
