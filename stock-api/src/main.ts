@@ -7,8 +7,8 @@ async function bootstrap() {
 
   // --- CORRECTION CORS ---
   app.enableCors({
-    origin: '*', // En production, idéalement mettre l'URL du frontend, mais '*' débloque tout pour le test
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    origin: true, // Autorise toutes les origines (Frontend local et Render)
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
   // -----------------------

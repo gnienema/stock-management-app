@@ -32,7 +32,7 @@ import { Commande } from './commande/entities/commande.entity';
       host: process.env.DATABASE_URL ? undefined : 'localhost',
       port: process.env.DATABASE_URL ? undefined : 5432, // Port standard Postgres
       username: process.env.DATABASE_URL ? undefined : 'postgres', // REMPLACEZ PAR VOTRE USER LOCAL SI BESOIN
-      password: process.env.DATABASE_URL ? undefined : 'votre_mot_de_passe_local', // REMPLACEZ PAR VOTRE PASS LOCAL
+      password: process.env.DATABASE_URL ? undefined : '0779679736', // REMPLACEZ PAR VOTRE PASS LOCAL
       database: process.env.DATABASE_URL ? undefined : 'stock_db',
 
       // SSL (Obligatoire pour Render, désactivé en local)
