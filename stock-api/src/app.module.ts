@@ -21,31 +21,26 @@ import { Emplacement } from './emplacement/entities/emplacement.entity';
 
 
 
-@Module({
-  imports: [
-    // 1. Configuration de la Connexion à la Base de Données (CRITIQUE)
-    TypeOrmModule.forRoot({
+// stock-api/src/app.module.ts
+
+TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5433,
-      username: 'postgres', // <--- CORRECTION CRITIQUE ICI
-      password: '0779679736', // <--- CORRECTION CRITIQUE ICI
-      database: 'stock_db',
-          
-      // Liste de toutes les entités du projet (ajustez les chemins si nécessaire)
-      entities: [Client, Produit, Fournisseur, Emplacement], 
       
-      synchronize: true, // DEV ONLY! NE PAS UTILISER EN PRODUCTION
+      // 1. PRIORITÉ : Utiliser l'URL fournie par Render si elle existe
+      url: process.env.DATABASE_URL, 
+
+      // 2. FALLBACK : Si pas d'URL (en local), utiliser les paramètres classiques
+      host: process.env.DATABASE_URL ? undefined : 'localhost',
+      port: process.env.DATABASE_URL ? undefined : 5433, 
+      username: process.env.DATABASE_URL ? undefined : 'postgres',
+      password: process.env.DATABASE_URL ? undefined : 'votre_mot_de_passe_local',
+      database: process.env.DATABASE_URL ? undefined : 'stock_db',
+
+      // 3. OBLIGATOIRE POUR RENDER : Le SSL
+      // Si on est en ligne (DATABASE_URL existe), on active le SSL, sinon non.
+      ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,
+
+      entities: [Client, Produit, Fournisseur, Emplacement, /*... vos autres entités*/], 
+      autoLoadEntities: true,
+      synchronize: true, // Garder à true pour l'instant pour créer les tables
     }),
-    
-    // 2. Importation des Modules Applicatifs
-    ClientModule,
-    ProduitModule,
-    FournisseurModule,
-    EmplacementModule,
-    StatistiqueModule,
-  ],
-  controllers: [AppController],
-  providers: [AppService],
-})
-export class AppModule {}
