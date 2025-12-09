@@ -6,16 +6,19 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 't
 @Entity()
 export class Produit {
   // ... autres colonnes
-   @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn()
   id: number; // La clé primaire (ID) du produit.
 
   @Column({ length: 100 })
-  nom: string;
+  libelle: string;
 
-  @Column('decimal', { precision: 10, scale: 2 })
-  prix: number;
+  @Column('decimal', { name: 'prix_unitaire', precision: 10, scale: 2 })
+  prixUnitaire: number;
 
-  @Column({ type: 'int', default: 0 }) 
+  @Column({ name: 'seuil_min_stock', type: 'int', default: 0 })
+  seuilMinStock: number;
+
+  @Column({ type: 'int', default: 0 })
   quantite: number;
 
   // Relation ManyToOne avec Emplacement (C'est la propriété 'emplacement' qui manquait)

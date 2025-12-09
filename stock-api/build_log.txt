@@ -1,0 +1,11 @@
+
+> stock-api@0.0.1 build
+> nest build
+
+Found 1 error(s).
+src/statistique/statistique.service.ts:64:16 - error TS2339: Property 'qte' does not exist on type 'Produit'.
+
+
+64         qte: p.qte,
+                  ~~~
+

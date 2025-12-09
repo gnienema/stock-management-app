@@ -9,20 +9,22 @@ import { StatistiqueController } from './statistique.controller';
 import { Client } from '../client/entities/client.entity';
 import { Produit } from '../produit/entities/produit.entity';
 import { Emplacement } from '../emplacement/entities/emplacement.entity';
+import { Commande } from '../commande/entities/commande.entity';
 // import { Fournisseur } from '../fournisseur/entities/fournisseur.entity'; // Décommentez si nécessaire
 
 @Module({
   imports: [
     // CRITIQUE : Enregistre les entités pour créer les Repositories (InjectRepository)
     TypeOrmModule.forFeature([
-      Client, 
-      Produit, 
-      Emplacement, 
+      Client,
+      Produit,
+      Emplacement,
+      Commande,
       // Fournisseur
-    ]), 
+    ]),
   ],
   controllers: [StatistiqueController],
   providers: [StatistiqueService],
   // Le service Statistique n'a pas besoin d'être exporté car il est seulement utilisé par le contrôleur de ce module.
 })
-export class StatistiqueModule {}
+export class StatistiqueModule { }

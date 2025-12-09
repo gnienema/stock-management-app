@@ -23,17 +23,16 @@ import { Commande } from './commande/entities/commande.entity';
     // 1. Configuration de la Base de Données (Compatible Render & Local)
     TypeOrmModule.forRoot({
       type: 'postgres',
-      
+
       // OPTION 1 : Connexion via URL (Utilisé par Render)
-      url: process.env.DATABASE_URL, 
+      url: process.env.DATABASE_URL,
 
       // OPTION 2 : Connexion classique (Fallback pour Localhost)
-      // Si DATABASE_URL n'existe pas, on utilise ces valeurs :
-      host: process.env.DATABASE_URL ? undefined : 'localhost',
-      port: process.env.DATABASE_URL ? undefined : 5432, // Port standard Postgres
-      username: process.env.DATABASE_URL ? undefined : 'postgres', // REMPLACEZ PAR VOTRE USER LOCAL SI BESOIN
-      password: process.env.DATABASE_URL ? undefined : '0779679736', // REMPLACEZ PAR VOTRE PASS LOCAL
-      database: process.env.DATABASE_URL ? undefined : 'stock_db',
+      host: process.env.DB_HOST || 'localhost',
+      port: parseInt(process.env.DB_PORT || '5432'),
+      username: process.env.DB_USER || 'postgres',
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME || 'stock_db',
 
       // SSL (Obligatoire pour Render, désactivé en local)
       ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,
@@ -55,4 +54,4 @@ import { Commande } from './commande/entities/commande.entity';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
