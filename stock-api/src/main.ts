@@ -7,8 +7,8 @@ async function bootstrap() {
 
   // --- CORRECTION CORS ---
   app.enableCors({
-    origin: true, // Autorise toutes les origines (Frontend)
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    origin: '*', // En production, idéalement mettre l'URL du frontend, mais '*' débloque tout pour le test
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
   // -----------------------
@@ -19,6 +19,6 @@ async function bootstrap() {
     transform: true,
   }));
 
-  await app.listen(3000);
+await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
